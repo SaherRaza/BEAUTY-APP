@@ -169,11 +169,12 @@ export const CartItemCard = ({ item, qty }) => {
   const swipeFromRightOpen = (_id) => {
     console.log('Swiped from right: ', _id); 
     dispatch(removeFromCart(_id));
+
   };
   return (
     <Swipeable renderRightActions={rightSwipeActions}
     onSwipeableRightOpen={() => swipeFromRightOpen(item._id)} >
-
+    
    <View  className="flex-row px-6 w-full items-center my-1">
       {/* Image */}
       <View className="bg-white rounded-xl flex items-center justify-center p-2 w-16 h-16 relative">

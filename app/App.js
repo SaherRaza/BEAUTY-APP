@@ -9,6 +9,7 @@ import store from './context/store';
 import ProductScreen from './screens/ProductScreen';
 import BottomTab from './components/BottomTab';
 import CartScreen from './screens/CartScreen';
+import FavoriteScreen from './screens/FavoriteScreen';
 // import 'react-native-url-polyfill/auto';
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +38,7 @@ const App = () => {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="ProductScreen" component={ProductScreen} />
         <Stack.Screen name="CartScreen" component={CartScreen} />
+        <Stack.Screen name="FavoriteScreen" component={FavoriteScreen} />
       </Stack.Navigator>
     </Provider>
     {

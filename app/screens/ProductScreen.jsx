@@ -4,7 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ActivityIndicator, TouchableOpacity , Dimensions } from 'react-native';
 import { AntDesign, Entypo, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { addtocart } from './../context/actions/cartActions';
+import { addtocart, removeFromCart } from './../context/actions/cartActions';
+import { addToFavorites, removeFromFavorites } from '../context/actions/favoriteActions';
+
 
 const ProductScreen = ({route}) => {
   const dispatch = useDispatch(); 
@@ -13,6 +15,8 @@ const ProductScreen = ({route}) => {
     
   const feeds = useSelector((state) => state.feeds);
   const cartItems = useSelector((state) => state.cartItems);
+  const favoritesItems = useSelector((state) => state.favoritesItems);
+
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -26,6 +30,24 @@ const ProductScreen = ({route}) => {
   const handlePressCart = () =>{
     dispatch(addtocart({data:data, qty: qty}))
   }
+
+  // const AddFavorite = () =>{
+  //   dispatch(addToFavorites({data:data}))
+  // }
+ 
+  // const removeFavorite = (_id) =>{
+  //   dispatch(removeFromCart(_id))
+  // }
+  const toggleFavorite = () => {
+    if (
+      favoritesItems?.favorites?.filter((item) => item?.data?._id === data?._id)
+        ?.length > 0
+    ) {
+      dispatch(removeFromFavorites(data?._id)); // Remove from favorites
+    } else {
+      dispatch(addToFavorites({ data })); // Add to favorites
+    }
+  };
 
   const navigation = useNavigation();
 
@@ -102,9 +124,34 @@ const ProductScreen = ({route}) => {
         <Text className="text-sm font-semibold text-[#555]">{data?.shortDescription}</Text>
         </View>
 
-        <TouchableOpacity className="bg-black w-8 h-8 rounded-full flex items-center justify-center">
+        {/* {                     
+          favoritesItems?.favorites?.filter(item => item?.data?._id === data?._id)?.length > 0 ? 
+          <>
+          <TouchableOpacity 
+           className="bg-black w-8 h-8 rounded-full flex items-center justify-center">
+        <AntDesign name='heart' size={16} color={"red"} />
+        </TouchableOpacity>
+          </> :
+          <TouchableOpacity onPress={AddFavorite}
+          className="bg-black w-8 h-8 rounded-full flex items-center justify-center">
         <AntDesign name='heart' size={16} color={"#fbfbfb"} />
         </TouchableOpacity>
+
+        } */}
+
+        <TouchableOpacity
+  onPress={toggleFavorite}
+  className="bg-black w-8 h-8 rounded-full flex items-center justify-center"
+>
+  {favoritesItems?.favorites?.filter((item) => item?.data?._id === data?._id)
+    ?.length > 0 ? (
+    <AntDesign name="heart" size={16} color={"red"} />
+  ) : (
+    <AntDesign name="heart" size={16} color={"#fbfbfb"} />
+  )}
+</TouchableOpacity>
+
+       
 
         </View>
         

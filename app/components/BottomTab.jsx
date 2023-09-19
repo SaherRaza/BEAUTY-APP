@@ -21,10 +21,9 @@ const BottomTab = ({activeScreen}) => {
         <FontAwesome name='home' size={32} color={activeScreen === "Home" ? "#fff" : "#5C5576" } />
     </TouchableOpacity>
 
-    <TouchableOpacity>
-        <MaterialIcons name='collections' size={32} color={"#5C5576"} />
+    <TouchableOpacity  onPress={()=>navigation.navigate("FavoriteScreen")}>
+        <MaterialIcons name='favorite' size={32} color={activeScreen === "FavoriteScreen" ? "#fff" : "#5C5576" } />
     </TouchableOpacity>
-
     <TouchableOpacity onPress={()=>navigation.navigate("CartScreen")}>
         <MaterialIcons name='shopping-cart' size={32} color={activeScreen === "CartScreen" ? "#fff" : "#5C5576" }  />
     </TouchableOpacity>
