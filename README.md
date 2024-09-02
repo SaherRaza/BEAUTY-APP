@@ -1,5 +1,5 @@
 
-**BeautyApp** | JavaScript, React Native, Sanity, tailwindCSS
+**BeautyApp** | JavaScript, React Native, Expo, Sanity, tailwindCSS
 
 1. **Robust Feature Set**: The beauty app boasts comprehensive features including search functionality, add to cart, and add to favorites, ensuring a seamless and user-friendly shopping experience.
 
